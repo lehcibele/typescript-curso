@@ -13,6 +13,7 @@ export class NegociacaoController {
     adiciona() {
         const negociacao = this.criaNegociacao();
         console.log(negociacao);
+        this.limparFormulario();
     }
     criaNegociacao() {
         // tem que converter os elementos do DOM, pois ao pegar os dados vem no formato de string
@@ -23,5 +24,12 @@ export class NegociacaoController {
         const valor = parseInt(this.inputValor.value);
         // Retorna a class Negociacao
         return new Negociacao(date, quantidade, valor);
+    }
+    // método para limpar os inputs do formulario, após enviar
+    limparFormulario() {
+        this.inputData.value = '';
+        this.inputQuantidade.value = '';
+        this.inputValor.value = '';
+        this.inputData.focus();
     }
 }
