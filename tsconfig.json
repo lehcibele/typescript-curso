@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "outDir": "dist/js", // diretorio onde vai ser colocados os aquivos js após a compilação dos arquivos ts
+        "target": "ES6", // define a versão do ECMASCRIPT
+        "noEmitOnError": true, // se tiver algum erro no codigo ts não compila e não gera o arquivo js
+        "moduleResolution": "node"
+    },
+    "include": [
+        "app/**/*" // a pasta em que os arquivos ts estão, se tiver outra pasta colocar uma vigula e o nome da pasta
+    ]
+}
