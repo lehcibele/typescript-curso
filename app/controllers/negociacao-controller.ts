@@ -1,4 +1,5 @@
 import { Negociacao } from "../models/negociacao.js";
+import { Negociacoes } from "../models/negociacoes.js";
 
 /*
     controller --> é uma instancia, vai ser uma classe, vamos criar uma instancia dessa classe, sendo que ela que vai controlar a interação do form (index.html).
@@ -8,6 +9,7 @@ export class NegociacaoController {
     private inputData: HTMLInputElement;
     private inputQuantidade: HTMLInputElement;
     private inputValor: HTMLInputElement;
+    private negociacoes = new Negociacoes();
 
     constructor() {
         this.inputData = document.querySelector('#data');
@@ -18,7 +20,8 @@ export class NegociacaoController {
     // método adiciona
     adiciona(): void {
         const negociacao = this.criaNegociacao();
-        console.log(negociacao);
+        this.negociacoes.adiciona(negociacao);
+        console.log(this.negociacoes.lista());
         this.limparFormulario();
     }
 

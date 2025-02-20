@@ -1,20 +1,20 @@
 export class Negociacao {
-    constructor(data, quantidade, valor) {
-        this._data = data;
-        this._quantidade = quantidade;
-        this._valor = valor;
+    /*
+       # --> atributo privado em javascript, atributo antigo.
+       private --> atributo privado em TS.
+       O _ foi mantido, pois o nome do get não pode ser igual ao do atributo
+    */
+    constructor(_data, quantidade, valor) {
+        this._data = _data;
+        this.quantidade = quantidade;
+        this.valor = valor;
     }
     // get --> somente faz a leitura e retorna os atributos privados
     get data() {
+        const data = new Date(this._data.getTime()); // é uma nova referencia da data, para que não altere o _data 
         return this._data;
     }
-    get quantidade() {
-        return this._quantidade;
-    }
-    get valor() {
-        return this._valor;
-    }
     get volume() {
-        return this._quantidade * this._valor;
+        return this.quantidade * this.valor;
     }
 }
