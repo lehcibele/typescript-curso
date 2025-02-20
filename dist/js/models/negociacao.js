@@ -18,7 +18,3 @@ export class Negociacao {
         return this._quantidade * this._valor;
     }
 }
-/*
-    controller --> é uma instancia, vai ser uma classe, vamos criar uma instancia dessa classe, sendo que ela que vai controlar a interação do form (index.html).
-    O controller vai ser a ponte entre as interações do usuario na página e a criação de modelos.
-*/ 
