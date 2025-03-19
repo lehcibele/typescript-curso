@@ -1,3 +1,4 @@
+import { DiasDaSemana } from "../enums/dias-da-semana.js";
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
 import { MensagemView } from "../views/mensagem-view.js";
@@ -12,21 +13,26 @@ export class NegociacaoController {
     private inputQuantidade: HTMLInputElement;
     private inputValor: HTMLInputElement;
     private negociacoes = new Negociacoes();
-    private negociacoesView = new NegociacoesView('#negociacoesView');
+    private negociacoesView = new NegociacoesView('#negociacoesView', true);
     private mensagemView = new MensagemView('#mensagemView');
     private readonly SABADO = 6;
     private readonly DOMINGO = 0;
 
     constructor() {
-        this.inputData = document.querySelector('#data');
-        this.inputQuantidade = document.querySelector('#quantidade');
-        this.inputValor = document.querySelector('#valor');
+        this.inputData = document.querySelector('#data') as HTMLInputElement;
+        this.inputQuantidade = document.querySelector('#quantidade') as HTMLInputElement;
+        this.inputValor = document.querySelector('#valor') as HTMLInputElement;
         this.negociacoesView.update(this.negociacoes);
     }
 
     // método adiciona
     public adiciona(): void {
-        const negociacao = this.criaNegociacao();
+        const negociacao= Negociacao.criaDe(
+            this.inputData.value,
+            this.inputQuantidade.value,
+            this.inputValor.value
+        );
+
         if(!this.ehDiaUtil(negociacao.data)) {
             this.mensagemView.update('Apenas negociações em dias úteis são aceitas');
             return ;
@@ -39,21 +45,7 @@ export class NegociacaoController {
     }
 
     private ehDiaUtil(data: Date) {
-        return data.getDay() > this.DOMINGO && data.getDay() < this.SABADO;
-    }
-
-    private criaNegociacao(): Negociacao {
-        // tem que converter os elementos do DOM, pois ao pegar os dados vem no formato de string
-
-        const exp = /-/g; // expressão regular --> pega todos os hifens que encontrar (o g indica que pega todos, é global)
-        const date = new Date(this.inputData.value.replace(exp, ',')); // cria um objeto date que recebe o valor do input do forms e pega todos os hifens (exp) e substitui por virgula
-
-        // converte para inteiro
-        const quantidade = parseInt(this.inputQuantidade.value);
-        const valor = parseInt(this.inputValor.value);
-
-        // Retorna a class Negociacao
-        return new Negociacao(date, quantidade, valor);
+        return data.getDay() > DiasDaSemana.DOMINGO && data.getDay() < DiasDaSemana.SABADO;;
     }
 
     // método para limpar os inputs do formulario, após enviar

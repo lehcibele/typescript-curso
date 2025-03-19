@@ -19,4 +19,18 @@ export class Negociacao {
     get volume(): number {
         return this.quantidade * this.valor;
     }
+
+    public static criaDe(dataString: string, quantidadeString: string, valorString: string) {
+        // tem que converter os elementos do DOM, pois ao pegar os dados vem no formato de string
+
+        const exp = /-/g; // expressão regular --> pega todos os hifens que encontrar (o g indica que pega todos, é global)
+        const date = new Date(dataString.replace(exp, ',')); // cria um objeto date que recebe o valor do input do forms e pega todos os hifens (exp) e substitui por virgula
+
+        // converte para inteiro
+        const quantidade = parseInt(quantidadeString);
+        const valor = parseInt(valorString);
+
+        // Retorna a class Negociacao
+        return new Negociacao(date, quantidade, valor);
+    }
 }

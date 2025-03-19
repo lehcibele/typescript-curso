@@ -4,7 +4,9 @@
         "target": "ES6", // define a versão do ECMASCRIPT
         "noEmitOnError": true, // se tiver algum erro no codigo ts não compila e não gera o arquivo js
         "moduleResolution": "node", 
-        "noImplicitAny": true // não aadota o tipo any nas variaveis 
+        "noImplicitAny": true, // não aadota o tipo any nas variaveis 
+        "removeComments": true,
+        "strictNullChecks": true
     },
     "include": [
         "app/**/*" // a pasta em que os arquivos ts estão, se tiver outra pasta colocar uma vigula e o nome da pasta
